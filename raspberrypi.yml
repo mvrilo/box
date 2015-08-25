@@ -1,0 +1,9 @@
+---
+- hosts: all
+  remote_user: pi
+  sudo: yes
+  pre_tasks:
+    - name: Load variables
+      include_vars: defaults.yml
+  roles:
+    - servers

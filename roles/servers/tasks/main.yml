@@ -1,0 +1,28 @@
+---
+- name: 'Ensure wifi config path exists'
+  file: path=/etc/wpa_supplicant state=directory
+
+- name: 'Configure wifi'
+  template: src={{item}} dest=/{{item}} mode=0600 owner=root group=root
+  with_items:
+    - etc/wpa_supplicant/wpa_supplicant.conf
+
+- name: 'Update apt package cache'
+  apt: update_cache=yes
+
+- name: 'Upgrade apt to the lastest packages'
+  apt: upgrade=safe
+
+- name: 'Install some dev tools'
+  apt: name="{{item}}" state=present
+  with_items:
+    - curl
+    - htop
+    - vim
+    - git
+    - tmux
+    - ruby
+    - python
+
+- name: 'Reboot'
+  command: /sbin/reboot
