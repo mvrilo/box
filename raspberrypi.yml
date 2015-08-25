@@ -6,4 +6,10 @@
     - name: Load variables
       include_vars: defaults.yml
   roles:
-    - servers
+    - common
+    - web
+    - media
+  post_tasks:
+    - name: Reboot
+      command: /sbin/reboot
+

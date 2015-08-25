@@ -1,0 +1,14 @@
+- name: Install dnsmasq
+  apt: name=dnsmasq state=installed
+
+- name: Configure dnsmasq
+  copy: src=dnsmasq.conf
+        dest=/etc/dnsmasq.conf
+        owner=root
+        group=root
+        mode=0644
+  notify:
+    - restart dnsmasq
+
+- name: Ensure dnsmasq is running
+  service: name=dnsmasq state=running

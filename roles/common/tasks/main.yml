@@ -1,0 +1,41 @@
+---
+- name: Update apt package cache
+  apt: update_cache=yes cache_valid_time=72000
+
+- name: Install common packages
+  apt: name={{item}} state=installed
+  with_items:
+    - curl
+    - htop
+    - vim
+    - git
+    - tmux
+    - ruby
+    - python
+    - nginx
+    - wpasupplicant
+
+- name: Setting up a better hosts file
+  get_url: url=http://someonewhocares.org/hosts/hosts
+           dest=/etc/hosts
+           mode=0400
+           owner=root
+           group=root
+           overwrite=yes
+
+- name: Ensure wifi config path exists
+  file: path=/etc/wpa_supplicant state=directory
+
+- name: Configure wifi
+  template: src=wpa_supplicant/wpa_supplicant.conf
+            dest=/etc/wpa_supplicant/wpa_supplicant.conf
+            mode=0640
+            owner=root
+            group=root
+  notify: wpa_cli reconfigure
+
+- name: Get customized dotfiles
+  git: repo=https://github.com/mvrilo/dotfiles dest=/tmp/dotfiles
+
+# - name: Set customized dotfiles to every user
+  # : repo=https://github.com/mvrilo/dotfiles dest=/tmp/dotfiles
