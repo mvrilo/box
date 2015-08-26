@@ -18,10 +18,10 @@
 - name: Setting up a better hosts file
   get_url: url=http://someonewhocares.org/hosts/hosts
            dest=/etc/hosts
-           mode=0400
+           mode=0644
            owner=root
            group=root
-           overwrite=yes
+           force=yes
 
 - name: Ensure wifi config path exists
   file: path=/etc/wpa_supplicant state=directory
@@ -29,13 +29,24 @@
 - name: Configure wifi
   template: src=wpa_supplicant/wpa_supplicant.conf
             dest=/etc/wpa_supplicant/wpa_supplicant.conf
-            mode=0640
+            mode=0644
             owner=root
             group=root
-  notify: wpa_cli reconfigure
 
 - name: Get customized dotfiles
-  git: repo=https://github.com/mvrilo/dotfiles dest=/tmp/dotfiles
+  git: repo=https://github.com/mvrilo/dotfiles
+       dest=/tmp/dotfiles
+       recursive=yes
 
-# - name: Set customized dotfiles to every user
-  # : repo=https://github.com/mvrilo/dotfiles dest=/tmp/dotfiles
+- name: Ensure that tmux plugin dir exists in skel
+  file: path={{item}}/.tmux/plugins/tpm state=directory
+  with_items:
+    - /etc/skel
+    - "{{ ansible_env.HOME }}"
+
+- name: Set customized dotfiles to users
+  # copy: src=/tmp/dotfiles/ dest={{item}}
+  shell: cp -a /tmp/dotfiles/. {{item}}
+  with_items:
+    - /etc/skel
+    - "{{ ansible_env.HOME }}"

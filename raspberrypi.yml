@@ -7,9 +7,8 @@
       include_vars: defaults.yml
   roles:
     - common
-    - web
-    - media
-  post_tasks:
-    - name: Reboot
-      command: /sbin/reboot
-
+    - server
+    # - media
+  # post_tasks:
+  #   - name: Reboot
+  #     command: /sbin/reboot
