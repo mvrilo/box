@@ -4,7 +4,7 @@
   sudo: yes
   pre_tasks:
     - name: Load variables
-      include_vars: defaults.yml
+      include_vars: vars.yml
   roles:
     - common
     - server

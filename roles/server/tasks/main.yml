@@ -1,5 +1,11 @@
+- name: Install nginx
+  apt: name=nginx state=present
+
+- name: Ensure nginx is running
+  service: name=nginx state=running
+
 - name: Install dnsmasq
-  apt: name=dnsmasq state=installed
+  apt: name=dnsmasq state=present
 
 - name: Configure dnsmasq
   copy: src=dnsmasq.conf

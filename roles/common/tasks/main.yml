@@ -3,7 +3,7 @@
   apt: update_cache=yes cache_valid_time=72000
 
 - name: Install common packages
-  apt: name={{item}} state=installed
+  apt: name={{item}} state=present
   with_items:
     - curl
     - htop
@@ -12,7 +12,6 @@
     - tmux
     - ruby
     - python
-    - nginx
     - wpasupplicant
 
 - name: Setting up a better hosts file
@@ -45,8 +44,19 @@
     - "{{ ansible_env.HOME }}"
 
 - name: Set customized dotfiles to users
-  # copy: src=/tmp/dotfiles/ dest={{item}}
   shell: cp -a /tmp/dotfiles/. {{item}}
   with_items:
     - /etc/skel
     - "{{ ansible_env.HOME }}"
+
+- name: Copy unblockus script
+  copy: src=unblockus dest=/usr/local/bin/ mode=0775
+
+- name: Sets the unblockus script on cron
+  cron:
+    name="check ip availability of unblockus"
+    cron_file="unblockus-hourly-2"
+    job="/usr/local/bin/unblockus"
+    user="root"
+    minute="0"
+    hour="*/2"
