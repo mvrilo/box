@@ -13,6 +13,11 @@
     - ruby
     - python
     - wpasupplicant
+    - python-software-properties
+    - software-properties-common
+
+- name: Vim forever
+  lineinfile: dest=/etc/bash.bashrc line='export EDITOR=$(which vim)' owner=root group=root
 
 - name: Setting up a better hosts file
   get_url: url=http://someonewhocares.org/hosts/hosts

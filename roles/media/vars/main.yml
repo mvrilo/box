@@ -1,0 +1,7 @@
+media: /mnt/media
+downloads: /mnt/downloads
+incomplete: /mnt/incomplete
+watch: /mnt/watch
+web_user: transmission
+subs: /usr/bin/subs
+ratio: 5

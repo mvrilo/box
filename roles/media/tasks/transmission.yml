@@ -1,0 +1,27 @@
+---
+- name: Add transmission APT repository
+  apt_repository: repo="ppa:transmissionbt/ppa"
+
+- name: Install transmission daemon
+  apt: name={{item}} state=present
+  with_items:
+    - transmission-daemon
+    - transmission-cli
+  notify: stop transmission-daemon
+
+- name: Add downloads dir
+  file: path={{downloads}} owner=debian-transmission state=directory mode=0777
+
+- name: Add downloads dir
+  file: path={{downloads}} owner=debian-transmission state=directory mode=0777
+
+- name: Add watch dir
+  file: path={{watch}} owner=debian-transmission state=directory
+
+- name: Copy Transmission configuration
+  template:
+    src=transmission.json
+    dest=/etc/transmission-daemon/settings.json
+    owner=debian-transmission
+    mode=0666
+  notify: start transmission-daemon

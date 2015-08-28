@@ -8,7 +8,7 @@
   roles:
     - common
     - server
-    # - media
+    - media
   # post_tasks:
   #   - name: Reboot
   #     command: /sbin/reboot
