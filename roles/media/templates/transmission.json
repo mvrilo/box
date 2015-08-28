@@ -1,20 +1,21 @@
 {
+  "umask": 2,
   "encryption": 2,
-  "download-dir": {{downloads}},
-  "watch-dir": {{watch}},
+  "download-dir": "{{downloads}}",
+  "watch-dir": "{{watch}}",
   "watch-dir-enabled": true,
   "trash-original-torrent-files": true,
-  "incomplete-dir": {{incomplete}},
+  "incomplete-dir": "{{incomplete}}",
   "incomplete-dir-enabled": true,
   "idle-seeding-limit": 560,
   "idle-seeding-limit-enabled": true,
-  "ratio-limit": {{ratio}},
+  "ratio-limit": "{{ratio}}",
   "ratio-limit-enabled": true,
   "rpc-enabled": true,
-  "rpc-username": {{web_user}},
+  "rpc-username": "{{web_user}}",
   "rpc-authentication-required": false,
   "rpc-whitelist": "192.168.*.*,127.0.0.1",
   "rpc-whitelist-enabled": true,
   "script-torrent-done-enabled": true,
-  "script-torrent-done-filename": {{subs}}
+  "script-torrent-done-filename": "{{subs}}"
 }

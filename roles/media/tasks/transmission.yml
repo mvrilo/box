@@ -7,7 +7,9 @@
   with_items:
     - transmission-daemon
     - transmission-cli
-  notify: stop transmission-daemon
+
+- name: Stop transmission
+  service: name=transmission-daemon state=stopped
 
 - name: Add downloads dir
   file: path={{downloads}} owner=debian-transmission state=directory mode=0777
@@ -23,5 +25,7 @@
     src=transmission.json
     dest=/etc/transmission-daemon/settings.json
     owner=debian-transmission
-    mode=0666
-  notify: start transmission-daemon
+    mode=0766
+
+- name: Start transmission
+  service: name=transmission-daemon state=started
