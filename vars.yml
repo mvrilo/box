@@ -1,4 +1,3 @@
 ---
-nocows: True
 wifi_sid: sid
 wifi_password: pass

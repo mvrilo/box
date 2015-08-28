@@ -5,6 +5,7 @@
   pre_tasks:
     - name: Load variables
       include_vars: vars.yml
+      nocows: True
   roles:
     - common
     - server
