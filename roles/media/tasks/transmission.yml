@@ -1,6 +1,7 @@
 ---
 - name: Add transmission APT repository
   apt_repository: repo="ppa:transmissionbt/ppa"
+  ignore_errors: yes # will fail on debian
 
 - name: Install transmission daemon
   apt: name={{item}} state=present
