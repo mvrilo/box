@@ -1,0 +1,6 @@
+---
+hostname: raspberry-pi
+wifi:
+  sid: sid
+  password: pass
+

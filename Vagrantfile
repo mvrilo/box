@@ -1,7 +1,6 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "debian/wheezy64"
   config.vm.network :private_network , ip: "192.168.111.2"
-  config.vm.hostname = "raspberry-pi"
   config.vm.provision "ansible" do |ansible|
     ansible.groups = { "servers" => "192.168.111.2" }
     ansible.playbook = "raspberrypi.yml"

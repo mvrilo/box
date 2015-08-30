@@ -1,4 +1,7 @@
 ---
+- name: set hostname
+  hostname: name={{hostname}}
+
 - name: update apt cache
   apt: update_cache=yes cache_valid_time=72000
 
@@ -7,7 +10,7 @@
   with_items:
     - vim
     - git
-      tree
+    - tree
     - tmux
     - ruby
     - curl
@@ -28,6 +31,9 @@
            owner=root
            group=root
            force=yes
+
+- name: setting up hostname in hosts
+  lineinfile: dest=/etc/hosts regexp='127.0.0.1\tlocalhost$' line='127.0.0.1\tlocalhost\t{{hostname}}'
 
 - name: ensure wifi config path exists
   file: path=/etc/wpa_supplicant state=directory
