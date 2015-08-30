@@ -1,6 +1,6 @@
 {
   "umask": 2,
-  "encryption": 2,
+  "encryption": 1,
   "download-dir": "{{downloads}}",
   "watch-dir": "{{watch}}",
   "watch-dir-enabled": true,
