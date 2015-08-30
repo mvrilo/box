@@ -1,10 +1,6 @@
 ---
-- name: transmission | add apt repository
-  apt_repository: repo="ppa:transmissionbt/ppa"
-  ignore_errors: yes # will fail on debian
-
 - name: transmission | install daemon
-  apt: name={{item}} state=present
+  apt: name={{item}} default_release=jessie state=present
   with_items:
     - transmission-daemon
     - transmission-cli

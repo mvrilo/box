@@ -2,6 +2,12 @@
 - name: set hostname
   hostname: name={{hostname}}
 
+- name: add jessie repo
+  lineinfile: dest=/etc/apt/sources.list line="deb http://httpredir.debian.org/debian jessie main\ndeb-src http://httpredir.debian.org/debian jessie main\ndeb http://security.debian.org/ jessie/updates main\ndeb-src http://security.debian.org/ jessie/updates main"
+
+- name: add jessie repo pref
+  copy: src=jessie.pref dest=/etc/apt/preferences.d/jessie.pref
+
 - name: update apt cache
   apt: update_cache=yes cache_valid_time=72000
 
