@@ -6,7 +6,11 @@
   git: repo=https://github.com/RuudBurger/CouchPotatoServer dest=/opt/couchpotato
 
 - name: couchpotato | ensure /var/opt exists
-  file: path=/var/opt/couchpotato state=directory
+  file:
+    path=/var/opt/couchpotato
+    owner=couchpotato
+    state=directory
+    mode=0755
 
 - name: couchpotato | settings
   template: src=couchpotato.conf dest=/var/opt/couchpotato/settings.conf
