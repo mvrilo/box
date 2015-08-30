@@ -6,7 +6,7 @@
   git: repo=https://github.com/RuudBurger/CouchPotatoServer dest=/opt/couchpotato
 
 - name: couchpotato | settings
-  template: src=couchpotato.conf dest=/opt/couchpotato/settings.conf
+  template: src=couchpotato.conf dest=/var/opt/couchpotato/settings.conf
 
 - name: couchpotato | copy init file
   copy:
