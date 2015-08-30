@@ -1,0 +1,23 @@
+---
+- name: couchpotato | add user
+  user: name=couchpotato
+
+- name: couchpotato | clone repo
+  git: repo=https://github.com/RuudBurger/CouchPotatoServer dest=/opt/couchpotato
+
+- name: couchpotato | settings
+  template: src=couchpotato.conf dest=/opt/couchpotato/settings.conf
+
+- name: couchpotato | copy init file
+  copy:
+    src="couchpotato/init"
+    dest="/etc/init.d/couchpotato"
+    owner=root
+    group=root
+    mode=0755
+
+- name: couchpotato | set init to defaults
+  command: "update-rc.d couchpotato defaults"
+
+- name: couchpotato | running
+  service: name=couchpotato state=running

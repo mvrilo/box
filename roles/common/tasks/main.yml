@@ -1,8 +1,8 @@
 ---
-- name: Update apt package cache
+- name: update apt cache
   apt: update_cache=yes cache_valid_time=72000
 
-- name: Install common packages
+- name: install common packages
   apt: name={{item}} state=present
   with_items:
     - curl
@@ -15,11 +15,12 @@
     - wpasupplicant
     - python-software-properties
     - software-properties-common
+    - python3-lxml
 
-- name: Vim forever
+- name: vim forever
   lineinfile: dest=/etc/bash.bashrc line='export EDITOR=$(which vim)' owner=root group=root
 
-- name: Setting up a better hosts file
+- name: setting up ad-blocking hosts
   get_url: url=http://someonewhocares.org/hosts/hosts
            dest=/etc/hosts
            mode=0644
@@ -27,37 +28,37 @@
            group=root
            force=yes
 
-- name: Ensure wifi config path exists
+- name: ensure wifi config path exists
   file: path=/etc/wpa_supplicant state=directory
 
-- name: Configure wifi
+- name: config wifi
   template: src=wpa_supplicant/wpa_supplicant.conf
             dest=/etc/wpa_supplicant/wpa_supplicant.conf
             mode=0644
             owner=root
             group=root
 
-- name: Get customized dotfiles
+- name: download dotfiles
   git: repo=https://github.com/mvrilo/dotfiles
        dest=/tmp/dotfiles
        recursive=yes
 
-- name: Ensure that tmux plugin dir exists in skel
+- name: ensure tmux plugin dir existance
   file: path={{item}}/.tmux/plugins/tpm state=directory
   with_items:
     - /etc/skel
     - "{{ ansible_env.HOME }}"
 
-- name: Set customized dotfiles to users
+- name: set customized dotfiles to users
   shell: cp -a /tmp/dotfiles/. {{item}}
   with_items:
     - /etc/skel
     - "{{ ansible_env.HOME }}"
 
-- name: Copy unblockus script
+- name: copy unblockus script
   copy: src=unblockus dest=/usr/local/bin/ mode=0775
 
-- name: Sets the unblockus script on cron
+- name: set the unblockus script on cron
   cron:
     name="check ip availability of unblockus"
     cron_file="unblockus-hourly-2"

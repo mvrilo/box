@@ -1,11 +1,21 @@
 ---
-- name: Add Media dir
-  file: path={{media}} state=directory mode=0777
+- name: media | add dirs
+  file: path={{item}} state=directory mode=0777
+  with_items:
+    - "{{watch}}"
+    - "{{downloads}}"
+    - "{{incomplete}}"
+    - "{{media}}"
+    - "{{media}}/Music"
+    - "{{media}}/Movies"
+    - "{{media}}/TVShows"
 
-- name: Get subliminal
+- name: media | download subliminal
   easy_install: name=subliminal executable=yes
 
-- name: Script to automatic download subtitles
+- name: media | subtitles download script
   template: src=subs dest=/usr/local/bin/ mode=0775
 
 - include: transmission.yml
+- include: couchpotato.yml
+# - include: sickrage.yml

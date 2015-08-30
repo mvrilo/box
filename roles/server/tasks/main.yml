@@ -1,20 +1,18 @@
-- name: Install nginx
+- name: nginx | install
   apt: name=nginx state=present
 
-- name: Ensure nginx is running
+- name: nginx | running
   service: name=nginx state=running
 
-- name: Install dnsmasq
+- name: dnsmasq | install
   apt: name=dnsmasq state=present
 
-- name: Configure dnsmasq
+- name: dnsmasq | configure 
   copy: src=dnsmasq.conf
         dest=/etc/dnsmasq.conf
         owner=root
         group=root
         mode=0644
-  notify:
-    - restart dnsmasq
 
-- name: Ensure dnsmasq is running
+- name: dnsmasq | running
   service: name=dnsmasq state=running

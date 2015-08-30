@@ -2,6 +2,19 @@ media: /mnt/media
 downloads: /mnt/downloads
 incomplete: /mnt/incomplete
 watch: /mnt/watch
-web_user: transmission
 subs: /usr/bin/subs
-ratio: 5
+pushbullet_token: ""
+
+transmission:
+  address: 0.0.0.0
+  port: 9091
+  user: transmission
+  password: ""
+  ratio: 5
+
+couchpotato:
+  user: ""
+  password: ""
+  port: 5050
+  imdb:
+    watchlist_url: ""
