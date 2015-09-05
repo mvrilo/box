@@ -9,7 +9,7 @@
   copy: src=jessie.pref dest=/etc/apt/preferences.d/jessie.pref
 
 - name: update apt cache
-  apt: update_cache=yes cache_valid_time=72000
+  apt: update_cache=yes
 
 - name: install common packages
   apt: name={{item}} state=present
@@ -21,11 +21,15 @@
     - ruby
     - curl
     - htop
+    - openssl
     - python
-    - wpasupplicant
-    - python-software-properties
-    - software-properties-common
+    - python-dev
+    - python-pip
     - python3-lxml
+    - python-software-properties
+    - wpasupplicant
+    - software-properties-common
+    - libffi-dev
 
 - name: vim forever
   lineinfile: dest=/etc/bash.bashrc line='export EDITOR=$(which vim)' owner=root group=root

@@ -17,7 +17,7 @@
 
 - name: couchpotato | copy init file
   copy:
-    src="couchpotato/init"
+    src="couchpotato_init"
     dest="/etc/init.d/couchpotato"
     owner=root
     group=root

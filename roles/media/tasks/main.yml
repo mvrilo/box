@@ -1,5 +1,5 @@
 ---
-- name: media | add dirs
+- name: add dirs
   file: path={{item}} state=directory mode=0777
   with_items:
     - "{{watch}}"
@@ -10,12 +10,12 @@
     - "{{media}}/Movies"
     - "{{media}}/TVShows"
 
-- name: media | download subliminal
+- name: download subliminal
   easy_install: name=subliminal executable=yes
 
-- name: media | subtitles download script
+- name: subtitles download script
   template: src=subs dest=/usr/local/bin/ mode=0775
 
 - include: transmission.yml
 - include: couchpotato.yml
-# - include: sickrage.yml
+- include: sickrage.yml

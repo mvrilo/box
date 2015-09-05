@@ -1,0 +1,40 @@
+---
+- name: sickrage | add user
+  user: name=sickrage
+
+- name: sickrage | ensure /var/opt exists
+  file:
+    path={{item}}
+    owner=sickrage
+    state=directory
+    mode=0755
+  with_items:
+    - /var/opt/sickrage
+    - /opt/sickrage
+
+- name: sickrage | clone repo
+  git: repo=https://github.com/SiCKRAGETV/SickRage dest=/opt/sickrage
+
+- name: sickrage | settings
+  template:
+    src=sickrage.ini
+    dest=/var/opt/sickrage/config.ini
+    mode=0644
+    owner=sickrage
+
+- name: sickrage | get dependencies
+  pip: requirements=/opt/sickrage/requirements.txt
+
+- name: sickrage | copy init file
+  copy:
+    src="sickrage_init"
+    dest="/etc/init.d/sickrage"
+    owner=root
+    group=root
+    mode=0755
+
+- name: sickrage | set init to defaults
+  command: "update-rc.d sickrage defaults"
+
+- name: sickrage | running
+  service: name=sickrage state=running
