@@ -30,17 +30,19 @@
     - wpasupplicant
     - software-properties-common
     - libffi-dev
+    - build-essential
 
-- name: vim forever
+- name: vim forever!
   lineinfile: dest=/etc/bash.bashrc line='export EDITOR=$(which vim)' owner=root group=root
 
 - name: setting up ad-blocking hosts
-  get_url: url=http://someonewhocares.org/hosts/hosts
-           dest=/etc/hosts
-           mode=0644
-           owner=root
-           group=root
-           force=yes
+  copy:
+    src=hosts.gz
+    dest=/tmp/hosts.gz
+    owner=root
+    mode=0644
+
+- shell: gunzip /tmp/hosts.gz; mv /tmp/hosts /etc/hosts
 
 - name: setting up hostname in hosts
   lineinfile: dest=/etc/hosts regexp='127.0.0.1\tlocalhost$' line='127.0.0.1\tlocalhost\t{{hostname}}'
