@@ -1,1 +1,1 @@
-ansible-playbook -i hosts ./raspberrypi.yml
+ansible-playbook -i hosts ./box.yml

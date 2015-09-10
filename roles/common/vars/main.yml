@@ -1,5 +1,5 @@
 ---
-hostname: raspberry-pi
+hostname: box
 wifi:
   sid: sid
   password: pass
