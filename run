@@ -1,0 +1,11 @@
+#!/bin/bash
+
+env="$1"
+
+if [[ "$env" != "prod" ]]; then
+  vagrant destroy --force
+  vagrant up
+  env="test"
+fi
+
+ansible-playbook -i hosts box.yml --extra-vars "target=$1"
