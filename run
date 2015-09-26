@@ -1,8 +1,11 @@
 #!/bin/bash
+#
+# Usage:
+# ./run [-t,--test]
 
 env="$1"
 
-if [[ "$env" != "prod" ]]; then
+if [[ "$env" == "--test" || "$env" == "-t" ]]; then
   vagrant destroy --force
   vagrant up
   env="test"
