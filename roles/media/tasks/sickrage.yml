@@ -22,9 +22,6 @@
     mode=0644
     owner=sickrage
 
-- name: sickrage | get dependencies
-  pip: requirements=/opt/sickrage/requirements.txt
-
 - name: sickrage | copy init file
   copy:
     src="sickrage_init"
