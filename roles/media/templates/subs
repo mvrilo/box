@@ -1,2 +1,2 @@
 #!/bin/bash
-subliminal -q -l en -- {{media}}
+subliminal download -l en {{media}}

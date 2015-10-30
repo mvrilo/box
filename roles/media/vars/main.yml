@@ -1,7 +1,7 @@
-media: /mnt/media
-downloads: /mnt/downloads
-incomplete: /mnt/incomplete
-watch: /mnt/watch
+media: /media/media
+downloads: /media/downloads
+incomplete: /media/incomplete
+watch: /media/watch
 subs: /usr/bin/subs
 pushbullet_token: ""
 
