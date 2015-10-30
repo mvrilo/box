@@ -1,6 +1,0 @@
----
-hostname: box
-wifi:
-  sid: sid
-  password: pass
-

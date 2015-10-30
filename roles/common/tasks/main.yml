@@ -1,13 +1,4 @@
 ---
-- name: set hostname
-  hostname: name={{hostname}}
-
-- name: add jessie repo
-  lineinfile: dest=/etc/apt/sources.list line="deb http://httpredir.debian.org/debian jessie main\ndeb-src http://httpredir.debian.org/debian jessie main\ndeb http://security.debian.org/ jessie/updates main\ndeb-src http://security.debian.org/ jessie/updates main"
-
-- name: add jessie repo pref
-  copy: src=jessie.pref dest=/etc/apt/preferences.d/jessie.pref
-
 - name: update apt cache
   apt: update_cache=yes
 
@@ -27,10 +18,10 @@
     - python-pip
     - python3-lxml
     - python-software-properties
-    - wpasupplicant
     - software-properties-common
     - libffi-dev
     - build-essential
+    - dnsutils
 
 - name: vim forever!
   lineinfile: dest=/etc/bash.bashrc line='export EDITOR=$(which vim)' owner=root group=root
@@ -43,19 +34,6 @@
     mode=0644
 
 - shell: gunzip /tmp/hosts.gz; mv /tmp/hosts /etc/hosts
-
-- name: setting up hostname in hosts
-  lineinfile: dest=/etc/hosts regexp='127.0.0.1\tlocalhost$' line='127.0.0.1\tlocalhost\t{{hostname}}'
-
-- name: ensure wifi config path exists
-  file: path=/etc/wpa_supplicant state=directory
-
-- name: config wifi
-  template: src=wpa_supplicant.conf
-            dest=/etc/wpa_supplicant/wpa_supplicant.conf
-            mode=0644
-            owner=root
-            group=root
 
 - name: download dotfiles
   git: repo=https://github.com/mvrilo/dotfiles
