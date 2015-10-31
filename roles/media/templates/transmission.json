@@ -1,6 +1,8 @@
 {
   "umask": 2,
   "encryption": 1,
+  "cache-size-mb": 10,
+  "download-size-queue": 30,
   "download-dir": "{{downloads}}",
   "watch-dir": "{{watch}}",
   "watch-dir-enabled": true,
