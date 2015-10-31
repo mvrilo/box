@@ -1,14 +1,1 @@
-#!/bin/bash
-#
-# Usage:
-# ./run [-t,--test]
-
-env="$1"
-
-if [[ "$env" == "--test" || "$env" == "-t" ]]; then
-  vagrant destroy --force
-  vagrant up
-  env="test"
-fi
-
-ansible-playbook -i hosts box.yml --extra-vars "target=$1"
+ansible-playbook -i hosts box.yml
