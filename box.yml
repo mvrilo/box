@@ -1,5 +1,5 @@
 - sudo: yes
-  hosts: "{{ target }}"
+  hosts: all
   roles:
     - common
     - server
