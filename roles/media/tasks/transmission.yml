@@ -1,6 +1,6 @@
 ---
 - name: transmission | install daemon
-  apt: name={{item}} default_release=jessie state=present
+  apt: name={{item}} state=present
   with_items:
     - transmission-daemon
     - transmission-cli
@@ -14,6 +14,17 @@
     dest=/etc/transmission-daemon/settings.json
     owner=debian-transmission
     mode=0766
+
+- name: transmission | copy init file
+  copy:
+    src="transmission_init"
+    dest="/etc/init.d/transmission-daemon"
+    owner=root
+    group=root
+    mode=0755
+
+- name: transmission | set init to defaults
+  command: "update-rc.d transmission-daemon defaults"
 
 - name: transmission | start
   service: name=transmission-daemon state=started
