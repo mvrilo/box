@@ -1,4 +1,13 @@
 ---
+- name: sets the hostname
+  hostname: name={{ HOSTNAME | default("box") }}
+
+- name: Get the host part of the IP 
+  shell: hostname --all-ip-address
+  register: host_ip 
+
+- debug: var=host_ip
+
 - name: update apt cache
   apt: update_cache=yes cache_valid_time=86400
 
@@ -13,13 +22,13 @@
     - curl
     - htop
     - openssl
+    - nmap
     - python
     - python-dev
     - python-pip
     - python3-lxml
     - python-software-properties
     - software-properties-common
-    - libffi-dev
     - build-essential
     - dnsutils
 
@@ -35,31 +44,29 @@
 
 - shell: gunzip /tmp/hosts.gz; mv /tmp/hosts /etc/hosts
 
-- name: download dotfiles
-  git: repo=https://github.com/mvrilo/dotfiles
-       dest=/tmp/dotfiles
-       recursive=yes
+- name: add hostname in hosts
+  when: HOSTNAME is defined
+  lineinfile:
+    dest=/etc/hosts
+    insertbefore=BOF
+    line="127.0.0.1 {{ HOSTNAME | default('box.pi') }}"
 
-- name: ensure tmux plugin dir existance
-  file: path={{item}}/.tmux/plugins/tpm state=directory
-  with_items:
-    - /etc/skel
-    - "{{ ansible_env.HOME }}"
-
-- name: set customized dotfiles to users
-  shell: cp -a /tmp/dotfiles/. {{item}}
-  with_items:
-    - /etc/skel
-    - "{{ ansible_env.HOME }}"
+- name: add hostname in hosts
+  when: HOSTNAME is defined
+  lineinfile:
+    dest=/etc/hosts
+    insertbefore=BOF
+    line="{{ host_ip.stdout }} {{ HOSTNAME | default('box.pi') }}"
 
 - name: copy unblockus script
   copy: src=unblockus dest=/usr/local/bin/ mode=0775
 
 - name: set the unblockus script on cron
+  when: EMAIL is defined
   cron:
     name="check ip availability of unblockus"
     cron_file="unblockus-hourly-2"
-    job="/usr/local/bin/unblockus"
+    job="/usr/local/bin/unblockus {{ EMAIL }}"
     user="root"
     minute="0"
     hour="*/2"

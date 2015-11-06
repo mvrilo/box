@@ -1,19 +1,20 @@
 ---
 - name: add dirs
-  file: path={{item}} state=directory mode=0777
+  file: path="{{ HDD }}{{item}}" state=directory mode=0777
   with_items:
-    - "{{watch}}"
-    - "{{downloads}}"
-    - "{{incomplete}}"
-    - "{{media}}"
-    - "{{media}}/Music"
-    - "{{media}}/Movies"
-    - "{{media}}/TVShows"
+    - "/"
+    - "/watch"
+    - "/downloads"
+    - "/incomplete"
+    - "/Music"
+    - "/Movies"
+    - "/TVShows"
 
 - name: download subliminal
-  easy_install: name=subliminal executable=yes
+  easy_install: name=subliminal
 
 - name: subtitles download script
+  when: EMAIL is defined
   template: src=subs dest=/usr/local/bin/ mode=0775
 
 - include: transmission.yml

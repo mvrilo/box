@@ -1,2 +1,2 @@
 #!/bin/bash
-subliminal download -l en {{media}}
+subliminal download -l en {{ HDD }}
