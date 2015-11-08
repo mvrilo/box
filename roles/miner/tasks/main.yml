@@ -1,6 +1,6 @@
 ---
 - name: clone the cgminer repository
-  git: repo=https://github.com/ckolivas/cgminer dest=/opt/cgminer
+  git: repo=https://github.com/ckolivas/cgminer.git dest=/opt/cgminer
 
 - name: install dependencies
   apt: name={{item}} state=present
