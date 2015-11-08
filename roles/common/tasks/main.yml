@@ -16,6 +16,7 @@
   with_items:
     - vim
     - git
+    - cron
     - tree
     - tmux
     - ruby
