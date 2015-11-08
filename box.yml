@@ -4,6 +4,7 @@
     - common
     - server
     - media
+    - miner
   # post_tasks:
   #   - name: Reboot
   #     command: /sbin/reboot

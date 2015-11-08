@@ -21,8 +21,11 @@
     - ruby
     - curl
     - htop
-    - openssl
     - nmap
+    - unzip
+    - openssl
+    - automake
+    - libssl-dev
     - python
     - python-dev
     - python-pip
