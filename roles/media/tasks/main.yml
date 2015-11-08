@@ -3,9 +3,9 @@
   file: path="{{ HDD }}{{item}}" state=directory mode=0777
   with_items:
     - "/"
-    - "/watch"
-    - "/downloads"
-    - "/incomplete"
+    - "/.watch"
+    - "/.downloads"
+    - "/.incomplete"
     - "/Music"
     - "/Movies"
     - "/TVShows"
