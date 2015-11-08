@@ -26,6 +26,7 @@
     - openssl
     - automake
     - libssl-dev
+    - libusb-dev
     - python
     - python-dev
     - python-pip
