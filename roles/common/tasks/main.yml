@@ -2,6 +2,9 @@
 - name: sets the hostname
   hostname: name={{ HOSTNAME | default("box") }}
 
+- name: improving /boot/cmdline.txt
+  copy: src=cmdline.txt dest=/boot/cmdline.txt
+
 - name: Get the host part of the IP 
   shell: hostname --all-ip-address
   register: host_ip 
@@ -70,7 +73,6 @@
   when: EMAIL is defined
   cron:
     name="check ip availability of unblockus"
-    cron_file="unblockus-hourly-2"
     job="/usr/local/bin/unblockus {{ EMAIL }}"
     user="root"
     minute="0"

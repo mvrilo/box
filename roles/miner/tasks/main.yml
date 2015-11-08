@@ -18,10 +18,10 @@
   shell: |
     cd /opt/cgminer && \
     cp 01-cgminer.rules /etc/udev/rules.d/ && \
-    echo /usr/local/lib > /etc/ld.so.conf.d/usrlocal.conf && \
+    echo '/usr/local/lib' > /etc/ld.so.conf.d/usrlocal.conf && \
+    modprobe pl2303   vendor=0x067b product=0x0230 && \ # modprobe icarus devices
     ./autogen.sh && \
-    opts="--enable-avalon --enable-hashfast --enable-icarus" && \
-    CFLAGS="-O2 -Wall -march=native" ./configure $opts && \
+    CFLAGS="-O2 -Wall -march=native" ./configure --enable-avalon --enable-hashfast --enable-icarus && \
     make && make install
 
 - name: send the script into /usr/local/bin
