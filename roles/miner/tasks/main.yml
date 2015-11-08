@@ -22,13 +22,22 @@
     ./autogen.sh && \
     opts="--enable-avalon --enable-hashfast --enable-icarus" && \
     CFLAGS="-O2 -Wall -march=native" ./configure $opts && \
-    make
+    make && make install
 
 - name: send the script into /usr/local/bin
   copy:
     src="cgminer"
-    dest="/usr/local/bin/cgminer"
+    dest="/usr/local/bin/cgminerd"
     mode=0755
 
+- name: ensure .cgminer dir on root
+  file: path="/root/.cgminer" owner=root state=directory mode=0755
+
+- name: send the config file
+  copy: src=cgminer.conf dest={{item}}
+  with_items:
+    - /root/.cgminer/cgminer.conf
+    - /etc/cgminer.conf
+
 - name: run service with tmux help
-  command: /usr/local/bin/cgminer
+  command: /usr/local/bin/cgminerd
