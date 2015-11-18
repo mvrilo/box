@@ -30,6 +30,12 @@
     dest="/usr/local/bin/cgminerd"
     mode=0755
 
+- name: send the script into /usr/local/bin
+  lineinfile:
+    dest=/etc/rc.local
+    insertbefore=BOF
+    line="/usr/local/bin/cgminerd"
+
 - name: ensure .cgminer dir on root
   file: path="/root/.cgminer" owner=root state=directory mode=0755
 
