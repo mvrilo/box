@@ -1,6 +1,6 @@
 ---
 - name: sets the hostname
-  hostname: name={{ HOSTNAME | default("box") }}
+  hostname: name={{ inventory_hostname }}
 
 - name: improving /boot/cmdline.txt
   copy: src=cmdline.txt dest=/boot/cmdline.txt
@@ -53,18 +53,17 @@
 - shell: gunzip /tmp/hosts.gz; mv /tmp/hosts /etc/hosts
 
 - name: add hostname in hosts
-  when: HOSTNAME is defined
   lineinfile:
     dest=/etc/hosts
     insertbefore=BOF
-    line="127.0.0.1 {{ HOSTNAME | default('box.pi') }}"
+    line="127.0.0.1 {{ inventory_hostname }}"
 
 - name: add hostname in hosts
   when: HOSTNAME is defined
   lineinfile:
     dest=/etc/hosts
     insertbefore=BOF
-    line="{{ host_ip.stdout }} {{ HOSTNAME | default('box.pi') }}"
+    line="{{ ansible_host }} {{ inventory_hostname }}"
 
 - name: copy unblockus script
   copy: src=unblockus dest=/usr/local/bin/ mode=0775

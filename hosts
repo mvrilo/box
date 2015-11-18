@@ -1,1 +1,1 @@
-localhost ansible_connection=local
+box.pi ansible_host=192.168.1.5
