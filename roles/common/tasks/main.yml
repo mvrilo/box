@@ -76,3 +76,9 @@
     user="root"
     minute="0"
     hour="*/2"
+
+- name: ensure hdd directory exists
+  file: path={{ HDD }} state=directory mode=0777
+
+- name: rules to mount hdd
+  mount: name={{ HDD }} src='/dev/sda1' fstype=exfat state=present

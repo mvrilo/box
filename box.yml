@@ -5,6 +5,11 @@
     - server
     - media
     - miner
-  # post_tasks:
-  #   - name: Reboot
-  #     command: /sbin/reboot
+  vars: # fill me up
+    - HDD: ""
+    - EMAIL: ""
+    - IMDB_WATCHLIST: ""
+    - PUSHBULLET_TOKEN: ""
+  post_tasks:
+    - name: Reboot
+      command: /sbin/reboot

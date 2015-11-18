@@ -1,7 +1,0 @@
-#!/bin/bash
-# $1 = hostname
-# $2 = HDD
-# $3 = EMAIL
-# $4 = PUSHBULLET_TOKEN
-# $5 = IMDB_WATCHLIST
-ansible-playbook box.yml --extra-vars "HOSTNAME=$1 HDD=$2 EMAIL=$3 PUSHBULLET_TOKEN=$4 IMDB_WATCHLIST=$5"
