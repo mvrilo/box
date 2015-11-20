@@ -75,4 +75,4 @@
   file: path={{ HDD }} state=directory mode=0777
 
 - name: rules to mount hdd
-  mount: name={{ HDD }} src='/dev/sda1' fstype=exfat state=present
+  mount: name={{ HDD }} src='/dev/sda1' fstype=exfat state=present opts=nofail
