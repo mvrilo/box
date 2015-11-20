@@ -9,6 +9,8 @@ Tested on RPI2 with OSMC.
 - Ethernet connection - no wifi support for now
 - An external Harddrive (by default, fstab will try to mount it on /dev/sda1)
 - For connection, copy the ssh public key in the root's authorized keys
+- Update the `box.yml` file with your box ip address.
+- Update the `vars.yml` file with your personal settings.
 
 ### Contains
 
