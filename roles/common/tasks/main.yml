@@ -68,7 +68,7 @@
   file: path={{ HDD }} state=directory mode=0777
 
 - name: rules to mount hdd
-  mount: name={{ HDD }} src='/dev/sda1' fstype=exfat state=present opts=defaults,nofail,noatime
+  mount: name={{ HDD }} src='/dev/sda1' fstype=ext4 state=present opts=defaults,nofail,noatime
 
 - name: startup items
   copy: src=rc.local dest=/etc/rc.local owner=root
