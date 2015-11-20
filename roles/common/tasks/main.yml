@@ -5,12 +5,6 @@
 - name: improving /boot/cmdline.txt
   copy: src=cmdline.txt dest=/boot/cmdline.txt
 
-- name: Get the host part of the IP 
-  shell: hostname --all-ip-address
-  register: host_ip 
-
-- debug: var=host_ip
-
 - name: update apt cache
   apt: update_cache=yes cache_valid_time=86400
 
