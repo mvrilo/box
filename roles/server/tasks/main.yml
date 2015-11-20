@@ -1,8 +1,26 @@
 - name: dnsmasq | install
   apt: name=dnsmasq state=present
 
-- name: dnsmasq | configure 
+- name: dnsmasq | configure
   template: src=dnsmasq.conf dest=/etc/dnsmasq.conf
 
 - name: dnsmasq | running
   service: name=dnsmasq state=running
+
+- name: nfs
+  apt: name={{ item }} state=present
+  for_items:
+    - nfs-common
+    - nfs-server
+
+- name: nfs conf
+  copy: src=nfs.conf dest=/etc/exports owner=root
+
+- name: trigger exports file for nfs
+  command: exportfs
+
+- name: enable rpcbind
+  command: update-rc.d rpcbind enable
+
+- name: rpcbind | running
+  service: name=rpcbind state=running
