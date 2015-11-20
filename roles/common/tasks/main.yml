@@ -52,13 +52,6 @@
     insertbefore=BOF
     line="127.0.0.1 {{ inventory_hostname }}"
 
-- name: add hostname in hosts
-  when: HOSTNAME is defined
-  lineinfile:
-    dest=/etc/hosts
-    insertbefore=BOF
-    line="{{ ansible_host }} {{ inventory_hostname }}"
-
 - name: copy unblockus script
   copy: src=unblockus dest=/usr/local/bin/ mode=0775
 
@@ -75,4 +68,4 @@
   file: path={{ HDD }} state=directory mode=0777
 
 - name: rules to mount hdd
-  mount: name={{ HDD }} src='/dev/sda1' fstype=exfat state=present opts=nofail
+  mount: name={{ HDD }} src='/dev/sda1' fstype=exfat state=present opts=defaults,nofail
