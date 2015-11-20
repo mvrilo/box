@@ -1,15 +1,16 @@
 - sudo: yes
   hosts: all
+  vars_files:
+    - vars.yml
   roles:
     - common
     - server
     - media
     - miner
-  vars: # fill me up
-    - HDD: ""
-    - EMAIL: ""
-    - IMDB_WATCHLIST: ""
-    - PUSHBULLET_TOKEN: ""
   post_tasks:
-    - name: Reboot
-      command: /sbin/reboot
+    - name: Restarting the server
+      shell: sleep 2 && shutdown -r now "Restarting..."
+      async: 1
+      poll: 0
+      ignore_errors: true
+      sudo: true
