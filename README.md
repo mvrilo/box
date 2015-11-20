@@ -17,4 +17,5 @@ Tested on RPI2 with OSMC.
 - couchpotato
 - sickrage
 - cgminer
+- unblock-us script to periodically check the ip address (in case it changes)
 - dnsmasq (with [someonewhocares](http://someonewhocares.org/) hosts support)
