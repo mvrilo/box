@@ -12,9 +12,11 @@
     - usbutils
 
 - name: clone the cgminer repository
-  git: repo=https://github.com/ckolivas/cgminer.git dest=/opt/cgminer
+  git: repo=https://github.com/ckolivas/cgminer.git dest=/opt/cgminer update=no
+  register: cloned
 
 - name: drivers settings
+  when: cloned|changed
   shell: |
     cd /opt/cgminer && \
     cp 01-cgminer.rules /etc/udev/rules.d/ && \
@@ -22,17 +24,21 @@
     modprobe pl2303   vendor=0x067b product=0x0230
 
 - name: pre-build cgminer
+  when: cloned|changed
   shell: |
     cd /opt/cgminer && \
     ./autogen.sh && \
     CFLAGS="-O2 -Wall -march=native" ./configure --enable-avalon --enable-icarus
 
 - name: build cgminer
+  when: cloned|changed
+  register: build
   shell: |
     cd /opt/cgminer && \
     make -j4
 
 - name: install cgminer
+  when: build|changed
   shell: |
     cd /opt/cgminer && \
     make install

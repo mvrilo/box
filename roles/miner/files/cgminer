@@ -1,4 +1,4 @@
 #!/bin/bash
 cmd="cd /opt/cgminer/ && ./cgminer --icarus-options 115200:1:1 --icarus-timing 0.22 -o stratum+tcp://uk1.ghash.io:3333 -u mvrilo.alpha -o stratum+tcp://uk1.ghash.io:3333 -u mvrilo.omega"
 # attach to bitcoin or creates a new one
-tmux a -t bitcoin 2>/dev/null || tmux new-session -s bitcoin -d "$cmd"
+tmux list-sessions | grep bitcoin || tmux new-session -s bitcoin -d "$cmd"
