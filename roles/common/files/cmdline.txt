@@ -1,1 +1,1 @@
-dwc_otg.lpm_enable=0 dwc_otg.speed=1 rootdelay=5 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait quiet osmcdev=rbp2
+dwc_otg.lpm_enable=0 dwc_otg.speed=1 rootdelay=5 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait quiet osmcdev=rbp2
