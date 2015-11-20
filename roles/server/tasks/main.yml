@@ -9,12 +9,16 @@
 
 - name: nfs
   apt: name={{ item }} state=present
-  for_items:
+  with_items:
     - nfs-common
     - nfs-server
 
 - name: nfs conf
-  copy: src=nfs.conf dest=/etc/exports owner=root
+  template:
+    src=nfs.conf
+    dest=/etc/exports
+    owner=root
+    mode=0766
 
 - name: trigger exports file for nfs
   command: exportfs
