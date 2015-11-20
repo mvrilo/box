@@ -71,4 +71,10 @@
   mount: name={{ HDD }} src='/dev/sda1' fstype=exfat state=present opts=defaults,nofail,noatime
 
 - name: startup items
-  copy: src=rc.local /etc/rc.local owner=root
+  copy: src=rc.local dest=/etc/rc.local owner=root
+
+- name: check existance of hdd dir
+  file: path="{{ HDD }}" state=directory mode=0777
+
+- name: try to mount all devices before finishing up
+  command: mount -a
