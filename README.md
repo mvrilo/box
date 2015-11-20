@@ -2,7 +2,7 @@
 
 My Raspberry Pi ansible setup.
 
-Tested on RPI2 with 
+Tested on RPI2 with OSMC.
 
 ### Requirements
 
