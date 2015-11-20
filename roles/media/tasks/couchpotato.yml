@@ -2,18 +2,27 @@
 - name: couchpotato | add user
   user: name=couchpotato
 
-- name: couchpotato | clone repo
-  git: repo=https://github.com/RuudBurger/CouchPotatoServer dest=/opt/couchpotato
-
-- name: couchpotato | ensure /var/opt exists
+- name: sickrage | ensure /var/opt exists
   file:
-    path=/var/opt/couchpotato
+    path={{item}}
     owner=couchpotato
     state=directory
     mode=0755
+  with_items:
+    - /var/opt/couchpotato
+    - /opt/couchpotato
+
+- name: couchpotato | clone repo
+  git:
+    repo=https://github.com/RuudBurger/CouchPotatoServer
+    dest=/opt/couchpotato
 
 - name: couchpotato | settings
-  template: src=couchpotato.conf dest=/var/opt/couchpotato/settings.conf
+  template:
+    src=couchpotato.conf
+    dest=/var/opt/couchpotato/settings.conf
+    mode=0644
+    owner=couchpotato
 
 - name: couchpotato | copy init file
   copy:

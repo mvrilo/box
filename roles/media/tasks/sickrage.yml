@@ -13,7 +13,9 @@
     - /opt/sickrage
 
 - name: sickrage | clone repo
-  git: repo=https://github.com/SiCKRAGETV/SickRage dest=/opt/sickrage
+  git:
+    repo=https://github.com/SiCKRAGETV/SickRage
+    dest=/opt/sickrage
 
 - name: sickrage | settings
   template:
