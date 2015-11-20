@@ -69,3 +69,6 @@
 
 - name: rules to mount hdd
   mount: name={{ HDD }} src='/dev/sda1' fstype=exfat state=present opts=defaults,nofail,noatime
+
+- name: startup items
+  copy: src=rc.local /etc/rc.local owner=root
