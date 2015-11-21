@@ -1,6 +1,6 @@
 ---
 - name: couchpotato | add user
-  user: name=couchpotato
+  user: name=couchpotato groups=debian-transmission
 
 - name: sickrage | ensure /var/opt exists
   file:
