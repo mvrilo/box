@@ -10,10 +10,19 @@
     - "/TVShows"
 
 - name: download subliminal
-  easy_install: name=subliminal
+  git:
+    repo=https://github.com/Diaoul/subliminal
+    dest=/opt/subliminal
+
+# had the same issues described here
+# http://blog.adruna.org/2015/11/installing-subliminal-on-centos-7/
+- name: update setup.py
+  replace: dest=/opt/subliminal/setup.py regexp='guessit>=0.9.1' replace='guessit==0.9.1'
+
+- name: install subliminal
+  shell: cd /opt/subliminal && python setup.py install
 
 - name: subtitles download script
-  when: EMAIL is defined
   template: src=subs dest=/usr/local/bin/ mode=0775
 
 - include: transmission.yml
