@@ -35,6 +35,9 @@
 - name: install docker
   apt: deb=https://downloads.hypriot.com/docker-hypriot_1.10.3-1_armhf.deb
 
+- name: start docker service
+  service: name=docker state=started
+
 - name: vim forever!
   lineinfile: dest=/etc/bash.bashrc line='export EDITOR=$(which vim)' owner=root group=root
 
