@@ -2,9 +2,6 @@
 - name: sets the hostname
   hostname: name={{ inventory_hostname }}
 
-- name: improving /boot/cmdline.txt
-  copy: src=cmdline.txt dest=/boot/cmdline.txt
-
 - name: update apt cache
   apt: update_cache=yes cache_valid_time=86400
 
@@ -19,6 +16,7 @@
     - ruby
     - curl
     - htop
+    - iotop
     - nmap
     - unzip
     - openssl
@@ -33,6 +31,9 @@
     - software-properties-common
     - build-essential
     - dnsutils
+
+- name: install docker
+  apt: deb=https://downloads.hypriot.com/docker-hypriot_1.10.3-1_armhf.deb
 
 - name: vim forever!
   lineinfile: dest=/etc/bash.bashrc line='export EDITOR=$(which vim)' owner=root group=root
@@ -51,18 +52,6 @@
     dest=/etc/hosts
     insertbefore=BOF
     line="127.0.0.1 {{ inventory_hostname }}"
-
-- name: copy unblockus script
-  copy: src=unblockus dest=/usr/local/bin/ mode=0775
-
-- name: set the unblockus script on cron
-  when: EMAIL is defined
-  cron:
-    name="check ip availability of unblockus"
-    job="/usr/local/bin/unblockus {{ EMAIL }}"
-    user="root"
-    minute="0"
-    hour="*/2"
 
 - name: ensure hdd directory exists
   file: path={{ HDD }} state=directory mode=0777
