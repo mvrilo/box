@@ -1,2 +1,0 @@
-#!/bin/bash
-subliminal download -l en {{ HDD }}

@@ -5,26 +5,8 @@
     - "/.watch"
     - "/.downloads"
     - "/.incomplete"
-    - "/Music"
     - "/Movies"
     - "/TVShows"
 
-- name: download subliminal
-  git:
-    repo=https://github.com/Diaoul/subliminal
-    dest=/opt/subliminal
-
-# had the same issues described here
-# http://blog.adruna.org/2015/11/installing-subliminal-on-centos-7/
-- name: update setup.py
-  replace: dest=/opt/subliminal/setup.py regexp='guessit>=0.9.1' replace='guessit==0.9.1'
-
 - name: install subliminal
-  shell: cd /opt/subliminal && python setup.py install
-
-- name: subtitles download script
-  template: src=subs dest=/usr/local/bin/ mode=0775
-
-- include: transmission.yml
-- include: couchpotato.yml
-- include: sickrage.yml
+  apt: name=subliminal state=present
