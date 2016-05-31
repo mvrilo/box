@@ -13,7 +13,9 @@ Tested on a RPI2 with OSMC.
 
 ### Usage
 
-```ansible-playbook -i 192.168.1.5, box.yml```
+```
+ansible-playbook -i 192.168.1.5, box.yml
+```
 
 Note: the trailing `,` is necessary.
 

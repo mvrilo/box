@@ -10,3 +10,50 @@
 
 - name: install subliminal
   apt: name=subliminal state=present
+
+- name: install base container
+  docker_image:
+    name: murilo/box-base
+    state: present
+
+- name: install transmission container
+  docker_container:
+    name: transmission
+    state: present
+    image: murilo/box-transmission
+    restart_policy: always
+    ports:
+      - "9091:9091"
+    volumes:
+      - "$MEDIA/.data/transmission:/transmission/config"
+      - "$MEDIA/.incomplete:/transmission/incomplete"
+      - "$MEDIA/.downloads:/transmission/download"
+      - "$MEDIA/.watch:/transmission/watch"
+
+- name: install couchpotato container
+  docker_container:
+    link: transmission
+    name: couchpotato
+    state: present
+    image: murilo/box-couchpotato
+    restart_policy: always
+    ports:
+      - "5050:5050"
+    volumes:
+      - "$MEDIA/Movies:/couchpotato/movies"
+      - "$MEDIA/.downloads:/couchpotato/downloads"
+      - "$MEDIA/.data/couchpotato:/couchpotato/data"
+
+- name: install sickrage container
+  docker_container:
+    link: transmission
+    name: sickrage
+    state: present
+    image: murilo/box-sickrage
+    restart_policy: always
+    ports:
+      - "8085:8085"
+    volumes:
+      - "$MEDIA/TVShows:/sickrage/tvshows"
+      - "$MEDIA/.downloads:/sickrage/downloads"
+      - "$MEDIA/.data/sickrage:/sickrage/data"
