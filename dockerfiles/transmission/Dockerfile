@@ -1,4 +1,4 @@
-FROM box-base:latest
+FROM murilo/box-base:latest
 MAINTAINER Murilo Santana <mvrilo@gmail.com>
 
 RUN apk add -U transmission-daemon transmission-cli && rm -rf /var/cache/apk/*

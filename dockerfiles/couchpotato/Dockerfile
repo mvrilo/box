@@ -1,4 +1,4 @@
-FROM box-base:latest
+FROM murilo/box-base:latest
 MAINTAINER Murilo Santana <mvrilo@gmail.com>
 
 RUN git clone --recursive https://github.com/RuudBurger/CouchPotatoServer.git /couchpotato/src
