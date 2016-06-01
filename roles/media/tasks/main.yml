@@ -12,12 +12,10 @@
   apt: name=subliminal state=present
 
 - name: install base container
-  docker_image:
-    name: murilo/box-base
-    state: present
+  docker: image=murilo/box-base state=present
 
 - name: install transmission container
-  docker_container:
+  docker:
     name: transmission
     state: present
     image: murilo/box-transmission
@@ -31,12 +29,13 @@
       - "$MEDIA/.watch:/transmission/watch"
 
 - name: install couchpotato container
-  docker_container:
-    link: transmission
+  docker:
     name: couchpotato
     state: present
     image: murilo/box-couchpotato
     restart_policy: always
+    links:
+      - transmission
     ports:
       - "5050:5050"
     volumes:
@@ -45,12 +44,13 @@
       - "$MEDIA/.data/couchpotato:/couchpotato/data"
 
 - name: install sickrage container
-  docker_container:
-    link: transmission
+  docker:
     name: sickrage
     state: present
     image: murilo/box-sickrage
     restart_policy: always
+    links:
+      - transmission
     ports:
       - "8085:8085"
     volumes:
