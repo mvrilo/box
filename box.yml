@@ -1,4 +1,4 @@
-- sudo: yes
+- become: yes
   hosts: all
   vars_files:
     - vars.yml
@@ -13,4 +13,4 @@
       async: 1
       poll: 0
       ignore_errors: true
-      sudo: true
+      become: yes
