@@ -16,14 +16,8 @@ Tested on a RPI2 with OSMC.
 ### Usage
 
 ```
-make
+make # or: ansible-playbook box.yml
 ```
-or
-```
-ansible-playbook box.yml
-```
-
-Note: the trailing `,` is necessary.
 
 ### Contains
 
