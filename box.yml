@@ -6,7 +6,6 @@
     - common
     - server
     - media
-    - miner
   post_tasks:
     - name: Restarting the server
       shell: sleep 2 && shutdown -r now "Restarting..."
